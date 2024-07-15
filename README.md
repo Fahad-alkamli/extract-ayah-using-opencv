@@ -2,7 +2,7 @@
 This project will take advantage of openCV template matching to extract Basmalahs and Ayahs coordinates from Quran images:
 # Known limitations:
 
-1-As page 1 and 2 from the holy quran will have decorations detect is almost impossible we didn’t attempt to fix this issue.
+1-As page 1 and 2 from the holy quran will have decorations,detection will be almost impossible therefor we didn’t attempt to fix this issue.
 
 2-The program is able to detect up to 2 Surahs in a single page so from page 601 to 604 the detection will work for only two Surrah so we had to do them manually as they are not worth the time to try and fix the code.
 # How the program works:
