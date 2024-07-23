@@ -4,7 +4,6 @@ This project will take advantage of openCV template matching to extract Basmalah
 
 1-As page 1 and 2 from the holy quran will have decorations,detection will be almost impossible therefor we didn’t attempt to fix this issue.
 
-2-The program is able to detect up to 2 Surahs in a single page so from page 601 to 604 the detection will work for only two Surrah so we had to do them manually as they are not worth the time to try and fix the code.
 # How the program works:
 1-First you should enable extractBasmalahFromImagesToList() This function will give you the Basmalah so that ayah detection can detect the start and the end of a Surah based on the Basmalah.
 
