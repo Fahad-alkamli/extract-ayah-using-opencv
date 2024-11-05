@@ -5,7 +5,8 @@ This project will take advantage of openCV template matching to extract Basmalah
 
 # Requirements for the project to run and Things good to know
 
-1- Because GitHub doesn't support large files, I was not able to include the opencv jar file in the project, so you need to download it and place it in the lib folder in the project. You can download version opencv-4.9.0-0.jar from this link: 
+1- Because GitHub doesn't support large files, I was not able to include the opencv jar file in the project, so you need to download it and place it in the lib folder in the project. You can download version opencv-4.9.0-0.jar from this link: https://1drv.ms/u/s!AghHPDsdk5STpd0lMfVhK5SIdg4g3g?e=PDpWYL
+
 
 2- You will need to include your images into the app. I have only included few images so that you can see an example please remove them and include your images, you should start from page 1 which is Surat al fatha but the name should be "quran-all-pages-same-size-3 resized.jpg".
 
