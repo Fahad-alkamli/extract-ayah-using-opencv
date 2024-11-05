@@ -1,4 +1,6 @@
-![Gitea Last Commit](https://img.shields.io/gitea/last-commit/Fahad-alkamli/extract-ayah-using-opencv)
+![GitHub last commit (branch)](https://img.shields.io/github/last-commit/fahad-alkamli/extract-ayah-using-opencv/main)
+![GitHub Release](https://img.shields.io/github/v/release/fahad-alkamli/extract-ayah-using-opencv)
+
 
 ### extract-ayah-using-opencv
 This project will take advantage of openCV template matching to extract Basmalahs and Ayahs coordinates from Quran images.
