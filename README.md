@@ -16,12 +16,12 @@ This project will take advantage of openCV template matching to extract Basmalah
 
 4- I have included a few templates based on my version of the Quran, which is king Abdullah version, I will include a link if requested.
 
-5- If you encounter an error in detection you need to manually add templates, templates images can be found under images/templates but keep track of the templates number variable, please increase the number as you add more templates. The naming should be like this "template24.png" which is the current template so next will be "template25.png" but remeber increase the counter !!!
+5- If you encounter an error in detection you need to manually add templates, template images can be found under images/templates but keep track of the templates number variable, please increase the number as you add more templates. The naming should be like this "template24.png" which is the current template so next will be "template25.png" but remeber increase the counter !!!
 
 6- I have included file called "pages_ayah_count.txt" this file is for validating the detection, it includes each page and the expected ayahs to find.
 For example, page 1 expected detection 7
 
-7- This project will need first to find the basmalah locations for the whole Quran and you need to manually add the results to the CommonFunctions class.
+7- This project will need first to find the basmalah locations for the whole Quran and you need to manually add the results to the "getSurahBasmalahByPageId" function found in CommonFunctions class.
 
 
 # Known limitations:
@@ -69,7 +69,25 @@ After we have run the detection data through the duplications methods, we compar
 4- Next we enable extracting the basmalah first.
 5- We copy the results and edit getSurahBasmalahByPageId method in the CommonFunctions class with the new values.
 6- Finally, we are ready to extract the Ayah but don't forget to comment out extracting the Basmalah.
-7- Run the application and you will get the result as shown below:
+7- Run the application and you will get the result as shown in the output section.
 
 
 # Understand the Results (the output):
+The expected output will be something like this for the pages:
+```java
+ temp.add(new PageCoordinates("{190,483,6,2,124,620}{250,199,7,2,190,483}{320,65,8,2,250,199}{450,453,9,2,320,65}{510,181,10,2,450,453}{570,151,11,2,510,181}{640,200,12,2,570,151}{770,144,13,2,640,200}{900,314,14,2,770,144}{970,370,15,2,900,314}{1034,64,16,2,970,370}","3"));
+ temp.add(new PageCoordinates("{180,119,17,2,124,620}{250,338,18,2,180,119}{380,167,19,2,250,338}{580,408,20,2,380,167}{640,207,21,2,580,408}{830,498,22,2,640,207}{970,437,23,2,830,498}{1034,60,24,2,970,437}","4"));
+ ```
+This is just an arrayList of type PageCoordinates which is a class that will hold all the values for each page.
+So we are going to deal with the extracted values as per page, each page will have all the Y,X coordinates and the page number and the Surah order.
+Let’s break them into details: 
+```java
+{190,483,6,2,124,620}
+```
+These are the details of a single ayah it contains: end_Y,end_X,ayah_counter,Surah_index,start_Y,start_X and after all the ayah's we have the page number which is 3 in this example.
+
+![image](https://github.com/user-attachments/assets/c667b0e3-6bfc-45c5-8e88-5afecec6eca5)
+
+# How to use this output:
+You can run the program to generate a database of Y,X values for each ayah than you can implement click to play feature in your app.
+I am using this currently on my app available at play store under the name "Read Ayah" and I will be adding guide below that shows how to implement this in your app and some issues came into the way when implementing into an actual app.
