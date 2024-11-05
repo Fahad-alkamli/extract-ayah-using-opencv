@@ -1,9 +1,9 @@
 ### extract-ayah-using-opencv
 This project will take advantage of openCV template matching to extract Basmalahs and Ayahs coordinates from Quran images.
 
-### Requirements for the project to run and Things good to know
+# Requirements for the project to run and Things good to know
 
-1- Because GitHub doesn't support large files I was not able to include the opencv jar file in the project, so you need to download it and place it in the lib folder in the project. You can download version opencv-4.9.0-0.jar from this link: 
+1- Because GitHub doesn't support large files, I was not able to include the opencv jar file in the project, so you need to download it and place it in the lib folder in the project. You can download version opencv-4.9.0-0.jar from this link: 
 
 2- You will need to include your images into the app. I have only included few images so that you can see an example please remove them and include your images, you should start from page 1 which is Surat al fatha but the name should be "quran-all-pages-same-size-3 resized.jpg".
 
@@ -28,11 +28,11 @@ For example, page 1 expected detection 7
 
 2-After we receive the result from extractBasmalahFromImagesToList() We need to edit these values in the getSurahBasmalahByPageId method in the CommonFunctions class.
 
-3-Now Images should be inside images folder and we don’t need the first three pages as they are not part of the quran so the first image will be from page 5 (remember we can’t extract Surat al Fataha  and the first page of Surat al baqra as they both have decorations) In the quran this is page 3 but keep in mind the file name will start from 5.
+3-Now all the Images should be inside images folder and we don’t need the first three pages as they are not part of the quran so the first image will be from page 5 (remember we can’t extract Surat al Fataha  and the first page of Surat al baqra as they both have decorations) In the quran this is page 3 but keep in mind the file name will start from 5.
 
 
 # Things to know:
-1-We are using 21 templates for this detection you are welcome to add new templates but you need to edit:
+1-We are using 24 templates for this detection you are welcome to add new templates, but you need to edit:
 ```java
 public static int templateCounter=21;
 ```
@@ -41,15 +41,30 @@ public static int templateCounter=21;
 ```java
 	static int AyahCounter=6;
 ```
-3-The whole process is to detect as much detection as possible from the templates after that we send them thru functions to remove duplicates.
+3-The full process is to detect as much detection as possible from the templates. After that we send them through functions to remove duplicates.
 
 4-duplications are not always the same as different templates may detect the same ayah but with very close values for example:
 
-Ayah 6 using Template one will detect it's location as Y:120,X:200 and  a second Template will detect the same ayah but on Y:125,X:200 and another Template on Y:150,X:200
-* So simply looking for exact values is not going to work here we have implemented methods to detect very close values and make sure we have only a single location for Ayah 6.
+Ayah 6 using Template one will detect its location as Y:120,X:200 and  a second Template will detect the same ayah but on Y:125,X:200 and another Template on Y:150,X:200
+* So simply looking for exact values is not going to work here. We have implemented methods to detect very close values and make sure we have only a single location for Ayah 6.
 
 
 
-#  How we make sure we are having all the detections and that we are not missing ayahs?
-We have a file called temp.txt this file contains each page and the number of expected ayahs on this single page.
-After we have run the detection data thru the duplications methods we compare what we found with this file.
+#  How we make sure we have all the detections and that we are not missing ayahs?
+We have a file called pages_ayah_count.txt can be found under images folder, this file contains each page and the number of expected ayahs on this single page.
+After we have run the detection data through the duplications methods, we compare what we found with this file.
+
+# Step by Step guide on how to run the application 
+1- Make sure you have downloaded the opencv library and include it in the lib folder.
+
+2- Make sure to change the reference to this jar file in the Build Path.
+
+3- Include all your images starting from page 3 on the Quran until the last page, please keep in mind that the first page will be called "quran-all-pages-same-size-5 resized.jpg"  as page 1,2 are not actually Surah but an introduction to the Quran so we skip them and page 3-4 have decorations so we will start from page 5 which in the Holy Quran is page 3 , I know this must be annoying but you can fix it yourself.
+
+4- Next we enable extracting the basmalah first.
+5- We copy the results and edit getSurahBasmalahByPageId method in the CommonFunctions class with the new values.
+6- Finally, we are ready to extract the Ayah but don't forget to comment out extracting the Basmalah.
+7- Run the application and you will get the result as shown below:
+
+
+# Understand the Results (the output):
