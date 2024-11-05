@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"entities","l":"AyahLocation"},{"p":"test","l":"CommonFunctions"},{"p":"test","l":"Main"},{"p":"entities","l":"SurahBasmalah"}];updateSearchResults();
