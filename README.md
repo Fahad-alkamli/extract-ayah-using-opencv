@@ -91,3 +91,5 @@ These are the details of a single ayah it contains: end_Y,end_X,ayah_counter,Sur
 # How to use this output:
 You can run the program to generate a database of Y,X values for each ayah than you can implement click to play feature in your app.
 I am using this currently on my app available at play store under the name "Read Ayah" and I will be adding guide below that shows how to implement this in your app and some issues came into the way when implementing into an actual app.
+
+# JAVA docs can be found on the following link: https://alkamli.com/extract-ayah-using-opencv/
