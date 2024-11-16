@@ -1,9 +1,8 @@
-package test;
+package program;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashMap;
 import java.util.List;
 
 import entities.AyahLocation;
@@ -175,6 +174,12 @@ public class CommonFunctions {
 
 	        return null;
 	    }
+	   /**
+	    * This function will take a list of basmalah and ayah Y location to try and get Surah number
+	    * @param currentAyahY
+	    * @param AllBasmlahArray
+	    * @return
+	    */
 	   public static int getSurahNumberBasedOnBasmalah2(int currentAyahY,ArrayList<SurahBasmalah> AllBasmlahArray)
 	    {
 		   try {
@@ -222,6 +227,13 @@ public class CommonFunctions {
 	        return 0;
 	    }
 	   
+	   
+	   /**
+	    * This function will get the basmalah Y location of the basmalah, it's useful to know if the ayah is above or below the Basmalah Y location
+	    * @param currentAyahY
+	    * @param AllBasmlahArray
+	    * @return Basmalah Y location
+	    */
 	   public static int getBasmalahLocationBasedOnY(int currentAyahY,ArrayList<SurahBasmalah> AllBasmlahArray)
 	    {
 		   try {

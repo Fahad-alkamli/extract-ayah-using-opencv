@@ -1,4 +1,4 @@
-package test;
+package program;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -21,35 +21,52 @@ import nu.pattern.OpenCV;
 
 
 /**
- * This class will is the main program and consist of two major methods we enable them as we need
- * We need to start with extractBasmalahFromImagesToList as it will detect the basmalah from each page to a list and we modify this function getSurahBasmalahByPageId
- * Secondly, we can now detect the ayahs 
+ * This class is the main program and consist of two major methods we enable them as we need
+ * We need to start with @extractBasmalahFromImagesToList as it will detect the basmalah from each page to a list and we modify this function getSurahBasmalahByPageId
+ * Secondly, we can now detect the ayahs from @extractQuranAyahFromImage this function will call @testingPrint to print the output to the console for testing.
  * @author pc-fahad
  *
  */
 public class Main {
 
 
-	/*
+	/**
 	 *TemplateCounter counter for the templates to loop through 
 	 */
 	public static int templateCounter=23;
 	
 
-	/*
-	 *AyahCounter since we will start from page 3  ignoring the first two pages we need to set the start point to ayah 6
+	/**
+	 * AyahCounter Since we will start from page 3  ignoring the first two pages we need to set the start point to ayah 6
 	 */
 	static int AyahCounter=6;
 	
-	/*
-	 *OldAyahCounter This counter to count if the top of the page has a different surah the ayah should continue from the previous page
+	/**
+	 * OldAyahCounter This counter to count if the top of the page has a different surah the ayah should continue from the previous page
 	 */
 	static int oldAyahCounter=0;
+	/** 
+	 * Threshold the opencv sensitivity , it lower will detect more but may encounter false positive 
+	 */
 	final static double Threshold=0.68;//0.68
+	/**
+	 * SurahStartingX for the first ayah we can't detect it's start X location so we assume it's location 
+	 */
 	final static int SurahStartingX=620;
+	/**
+	 * SurahStartingY for the first ayah we can't detect it's start Y location so we assume it's location 
+	 */
 	final static int SurahStartingY=124;
 
+	/**
+	 * tempAyahList Will hold the values without startY,startX so that we iterate on the list after we finish to add startY,StartX from previous ayah
+	 */
 	static ArrayList<String> tempAyahList=new ArrayList<>();
+	
+	/**
+	 * finalCollection this is the final collection you can print it or do whatever you need
+	 */
+	static ArrayList<String> finalCollection=new ArrayList<>();
 
 /**
  * This is the main method to run each method as we see needed
@@ -59,7 +76,6 @@ public class Main {
 		
 		try {	
 		extractQuranAyahFromImage();
-		testingPrint();
 		//extractBasmalahFromImagesToList();
 		}catch(Exception e)
 		{
@@ -69,7 +85,11 @@ e.printStackTrace();
 
 	}
 	
-	static ArrayList<String> finalCollection=new ArrayList<>();
+	
+	/**
+	 * This method is responsible for organizing the startY,startX because we need to loop back to fetch them from the previous ayah, this can
+	 * done only after the ayah finish feels more efficient.
+	 */
 	private static void testingPrint()
 	{
 	try {
@@ -272,9 +292,10 @@ e.printStackTrace();
 			/**
 			 * Reading the images we started from 5 because the the pdf has page 1,2 as none Surah and page 3,4 are not possible to detect
 			 * because of all the colors and Zakrafa so we did them manually.
+			 * Note: please change this to 606 after you have added your images into the images folder.This will only work on the test images I have included.
 			 */
 			//for( int i=5;i<=606;i++)
-			for( int i=5;i<=606;i++)
+			for( int i=5;i<=10;i++)
 			{
 				/**
 				 * To begin our search we use the first template as a base line so that if
@@ -366,21 +387,25 @@ e.printStackTrace();
 				//Last chance to print
 				if(correctList!= null && correctList.size()==comp)
 				{
-					printAyahForPageUtily2(i, correctList, comp);
+					printAyahForPageUtily2(i, correctList);
 				}
 				
 
 			}	
+			//This function is responsible for adding the startY,startX and to print to the console
+			testingPrint();
 		}catch(Exception e)
 		{
 			e.printStackTrace();
 		}
 	}
 
-	/*
+	/**
 	 * Print the page's ayah to the console
+	 * Not used kept it for reference.
 	 * 
 	 */
+	@SuppressWarnings("unused")
 	private static void printAyahForPageUtily(int i, ArrayList<String> correctList, int comp) 
 	{
 		try {
@@ -517,13 +542,23 @@ e.printStackTrace();
 	}
 
 
-	/*
+	/**
 	 * These two counters will keep values as we Iterate over the pages to keep the old ayah and the old surah 
 	 * and change them if we encounter a new basmlah by increasing the surah number and reseting the ayah counter
 	 */
 	static int ayahCounter2=5;
+	/**
+	 * surahCounter we will start from Surah 2 which is Al-bagrah
+	 */
 	static int surahCounter=2;
-	private static void printAyahForPageUtily2(int page, ArrayList<String> correctList, int comp)
+	
+	/**
+	 * this function is responsible for organizing the ayah based on the page + Surah it prepares the data to be illterated over by @testPrint function
+	 * That will add startY,startX.  
+	 * @param page the page number we are currently working on
+	 * @param correctList the list of ayah we detected
+	 */
+	private static void printAyahForPageUtily2(int page, ArrayList<String> correctList)
 	{
 		try {
 			/*Because the file naming is different from the actual pages we need to account for the missing 
@@ -898,8 +933,8 @@ e.printStackTrace();
 	/**
 	 * We have an issue when using multiple templates the CV library will detect different values for the same ayah and we get different Y value
 	 * for the ayahs on the same line we need to fix this with this value
-	 * @param correctList
-	 * @return
+	 * @param correctList the list before unify Y value for ayah on the same line
+	 * @return the list after fixing Y values to be exactly the same
 	 */
 	public static ArrayList<String> unifyY(ArrayList<String> correctList)
 	{
